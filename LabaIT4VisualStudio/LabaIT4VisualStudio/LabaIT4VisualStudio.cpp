@@ -1,17 +1,51 @@
 ﻿// LabaIT4VisualStudio.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
 //
 
+
 #include <iostream>
+
+using namespace std;
 
 void Initialize();
 void GetInput();
 void Update();
 void Render();
 void Shutdown();
+
+
+
+
 int main()
 {
     std::cout << "Hello World!\n";
 }
+
+void Initialize()
+{
+    cout << "Initializing ..." << endl;
+}
+
+void GetInput()
+{
+    return;
+}
+
+void Update()
+{
+    return;
+}
+
+void Render()
+{
+    cout << "rendering..." << endl;
+}
+
+void Shutdown()
+{
+    cout << "Shutting down..." << endl;
+}
+
+
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
 // Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
