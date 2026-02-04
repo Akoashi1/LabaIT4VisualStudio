@@ -1,20 +1,88 @@
-﻿// LabaIT4VisualStudio.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
+﻿#include <iostream>
 
-#include <iostream>
+using namespace std;
 
-int main()
-{
-    std::cout << "Welcome in my Game!\n";
+class LiczbZespolona {
+private:
+    double re;
+    double im;
+
+public:
+    LiczbZespolona() {
+        re = 0;
+        im = 0;
+    }
+
+    LiczbZespolona(double r, double i) {
+        re = r;
+        im = i;
+    }
+
+    LiczbZespolona(const LiczbZespolona& inna) {
+        re = inna.re;
+        im = inna.im;
+    }
+
+    ~LiczbZespolona() {
+    }
+
+    LiczbZespolona& operator=(const LiczbZespolona& inna) {
+        re = inna.re;
+        im = inna.im;
+        return *this;
+    }
+
+    LiczbZespolona operator+(const LiczbZespolona& inna) {
+        LiczbZespolona wynik;
+        wynik.re = re + inna.re;
+        wynik.im = im + inna.im;
+        return wynik;
+    }
+
+    LiczbZespolona operator-(const LiczbZespolona& inna) {
+        return LiczbZespolona(re - inna.re, im - inna.im);
+    }
+
+    LiczbZespolona operator*(const LiczbZespolona& inna) {
+        double nowe_re = re * inna.re - im * inna.im;
+        double nowe_im = re * inna.im + im * inna.re;
+        return LiczbZespolona(nowe_re, nowe_im);
+    }
+
+    LiczbZespolona operator/(const LiczbZespolona& inna) {
+        double mianownik = inna.re * inna.re + inna.im * inna.im;
+        double nowe_re = (re * inna.re + im * inna.im) / mianownik;
+        double nowe_im = (im * inna.re - re * inna.im) / mianownik;
+
+        return LiczbZespolona(nowe_re, nowe_im);
+    }
+
+    double getRe() { return re; }
+    double getIm() { return im; }
+
+    friend ostream& operator<<(ostream& os, const LiczbZespolona& lz) {
+        os << lz.re << " + " << lz.im << "i";
+        return os;
+    }
+};
+
+int main() {
+    LiczbZespolona z1;
+    LiczbZespolona z2(3.0, 4.0);
+    LiczbZespolona z3(z2);
+
+    LiczbZespolona z4(5.0, 2.0);
+    LiczbZespolona z5(1.0, 3.0);
+
+    LiczbZespolona suma = z4 + z5;
+    LiczbZespolona roznica = z4 - z5;
+    LiczbZespolona iloczyn = z4 * z5;
+    LiczbZespolona iloraz = z4 / z5;
+
+    cout << "Suma: " << suma << endl;
+    cout << "Roznica: " << roznica << endl;
+    cout << "Iloczyn: " << iloczyn << endl;
+    cout << "Iloraz: " << iloraz << endl;
+
+    return 0;
 }
-
-// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
-// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
-
-// Porady dotyczące rozpoczynania pracy:
-//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
-//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
-//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
-//   4. Użyj okna Lista błędów, aby zobaczyć błędy
-//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
-//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
